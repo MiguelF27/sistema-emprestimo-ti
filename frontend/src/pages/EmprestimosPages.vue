@@ -37,7 +37,7 @@
     </q-table>
     <q-btn color="primary" icon="add" label="Novo" @click="dialog = true"></q-btn>
 
-    <q-dialog v-model="dialog">
+    <q-dialog v-model="dialog" @hide="limparFormulario">
       <q-card>
         <q-card-section>
           <div class="text-h6">Cadastro de Empréstimos</div>
@@ -202,7 +202,7 @@ async function buscarUsuarios () {
       value: u.id
     }))
   } catch (error) {
-    console.error('Erro ao buscar usuários:', error)
+    console.error('Erro ao buscar funcionários:', error)
   }
 }
 
@@ -221,7 +221,7 @@ async function buscarEquipamentos () {
     return {
       label: `${e.nome} (Código: ${e.patrimonio})${avisoStatus}`,
       value: e.id,
-      disable: !isDisponivel 
+      disable: !isDisponivel
     }
   })
 }
@@ -247,6 +247,14 @@ async function buscarEmprestimos (filtros = {}) {
 
   } catch (error) {
     console.error('Erro ao buscar empréstimos:', error)
+  }
+}
+
+function limparFormulario() {
+  form.value = {
+    usuarioId: null,
+    equipamentoId: null,
+    dataDevolucaoPrevista: ''
   }
 }
 
