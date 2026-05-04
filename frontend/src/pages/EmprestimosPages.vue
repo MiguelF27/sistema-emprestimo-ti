@@ -208,13 +208,22 @@ async function buscarUsuarios () {
 
 async function buscarEquipamentos () {
   const response = await api.get('/equipamentos')
-
   equipamentos.value = response.data
 
-  equipamentosOptions.value = equipamentos.value.map(e => ({
-    label: `${e.nome} (Código: ${e.patrimonio})`,
-    value: e.id
-  }))
+  equipamentosOptions.value = equipamentos.value.map(e => {
+
+    const isDisponivel = e.status === 'DISPONIVEL'
+
+    let avisoStatus = ''
+    if (e.status === 'EM_USO') avisoStatus = ' - [EM USO]'
+    if (e.status === 'MANUTENCAO') avisoStatus = ' - [EM MANUTENÇÃO]'
+
+    return {
+      label: `${e.nome} (Código: ${e.patrimonio})${avisoStatus}`,
+      value: e.id,
+      disable: !isDisponivel 
+    }
+  })
 }
 
 async function buscarEmprestimos (filtros = {}) {

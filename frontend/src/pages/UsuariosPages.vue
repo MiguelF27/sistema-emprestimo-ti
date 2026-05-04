@@ -101,7 +101,7 @@ async function buscarUsuarios (filtros = {}) {
     usuarios.value = response.data
 
   } catch (error) {
-    console.error('Erro ao buscar usuarios:', error)
+    console.error('Erro ao buscar funcionário:', error)
   }
 }
 
@@ -130,7 +130,7 @@ async function salvarUsuario () {
 
       Notify.create({
         type: 'positive',
-        message: 'Usuarios atualizado com sucesso'
+        message: 'Funcionário atualizado com sucesso'
       })
 
     } else {
@@ -138,7 +138,7 @@ async function salvarUsuario () {
 
       Notify.create({
         type: 'positive',
-        message: 'Usuarios cadastrado com sucesso'
+        message: 'Funcionário cadastrado com sucesso'
       })
     }
 
@@ -160,7 +160,7 @@ async function salvarUsuario () {
 
     Notify.create({
       type: 'negative',
-      message: 'Erro ao salvar usuarios'
+      message: 'Erro: Email ja cadastrado'
     })
   }
 }
@@ -186,14 +186,14 @@ async function deletarUsuario (id) {
 
     Notify.create({
       type: 'positive',
-      message: 'Usuario deletado'
+      message: 'Funcionário deletado'
     })
 
   } catch (error) {
     console.error('Erro ao deletar:', error)
     Notify.create({
       type: 'negative',
-      message: 'Erro ao deletar usuario'
+      message: 'Erro ao deletar funcionário'
     })
   }
 }
